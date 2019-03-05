@@ -1,0 +1,28 @@
+{
+  "name": "mlt-mobile-Serve",
+  "version": "1.0.0",
+  "description": "mlt 移动端服务器",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevin9281/mlt-mobile-Serve.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevin9281/mlt-mobile-Serve/issues"
+  },
+  "homepage": "https://github.com/kevin9281/mlt-mobile-Serve#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "mysql": "^2.16.0",
+    "pool": "^0.4.1"
+  }
+}
