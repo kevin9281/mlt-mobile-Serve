@@ -179,11 +179,11 @@ CREATE TABLE home(
 );
 
 --插入数据
-INSERT INTO home VALUES(null,'园田海未OP装良笑社粘土人510-《Love Live》良笑社 No.510 Q版粘土人','http:127.0.0.1:3000/product/home1 http:127.0.0.1:3000/details/on1 http:127.0.0.1:3000/details/on2 http:127.0.0.1:3000/details/on3',175,210,'Good Smile Company No.510');
-INSERT INTO home VALUES(null,'站立版Saber新娘版SEGA景品-《Fate Extra CCC》 SEGA 景品手办','http:127.0.0.1:3000/product/home2 http:127.0.0.1:3000/details/in1 http:127.0.0.1:3000/details/in2',95,0,'良笑社 Fare Extra CCC 新娘Ver.');
-INSERT INTO home VALUES(null,'皮卡丘眼镜厂挂件-《口袋妖怪》眼镜厂 毛绒钥匙挂件特价（随机发货）','http:127.0.0.1:3000/product/home3 http:127.0.0.1:3000/details/qn1',11,13.2,'眼镜厂 毛绒钥匙挂件');
-INSERT INTO home VALUES(null,'双叶杏景品-《偶像大师》眼镜厂 SQ系列 景品手办','http:127.0.0.1:3000/product/home4 http:127.0.0.1:3000/details/wn1',75,90,'眼镜厂 SQ景品 Candy Island');
-INSERT INTO home VALUES(null,'定春长款钱包-《银魂》 万事屋吉祥物 正版拉链钱包 现货','http:127.0.0.1:3000/product/home5 http:127.0.0.1:3000/details/en1',22,26.4,'漫能 万事屋吉祥物');
+INSERT INTO home VALUES(null,'园田海未OP装良笑社粘土人510-《Love Live》良笑社 No.510 Q版粘土人','http://127.0.0.1:3000/product/home1.jpg',175,210,'Good Smile Company No.510'),
+(null,'站立版Saber新娘版SEGA景品-《Fate Extra CCC》 SEGA 景品手办','http://127.0.0.1:3000/product/home2.jpg',95,0,'良笑社 Fare Extra CCC 新娘Ver.'),
+(null,'皮卡丘眼镜厂挂件-《口袋妖怪》眼镜厂 毛绒钥匙挂件特价（随机发货）','http://127.0.0.1:3000/product/home3.jpg',11,13.2,'眼镜厂 毛绒钥匙挂件'),
+(null,'双叶杏景品-《偶像大师》眼镜厂 SQ系列 景品手办','http://127.0.0.1:3000/product/home4.jpg',75,90,'眼镜厂 SQ景品 Candy Island'),
+(null,'定春长款钱包-《银魂》 万事屋吉祥物 正版拉链钱包 现货','http://127.0.0.1:3000/product/home5.jpg',22,26.4,'漫能 万事屋吉祥物');
 
 
 
