@@ -1,7 +1,7 @@
 //导入路由器以及中间件
 const express=require('express');
 const userRouter=require('./routes/user.js');
-// const proRouter=require('./routes/product.js');
+const proRouter=require('./routes/product.js');
 const bodyParser=require('body-parser');
 //加载跨域访问的模块 引入跨域模块 
 const cors=require("cors"); 
@@ -36,7 +36,7 @@ app.use(session({
 
 //把用户路由器引用并挂载到/user下
 app.use('/user',userRouter);
-// app.use('/product',proRouter);
+app.use('/product',proRouter);
 
 //服务器目录
 //mlt-mobile_server
