@@ -33,6 +33,22 @@ router.get("/imageList",(req,res)=>{
 // 测试接口:http://127.0.0.1:3000/product/imageList
 });
 
+//Category 页面商品
+router.get('/categoryPro',(req,res)=>{
+	var pid = req.query.pid;
+	if(!pid) { pid = 1}
+	pool.query('SELECT * FROM category_product LIMIT 0,10',[pid],(err,result)=>{
+		if(err) throw err;
+		if(result.length > 0 ) {
+			res.send({ code:1,data:result })
+		}
+	})
+//测试接口:http://127.0.0.1:3000/product/categoryPro?pid=1
+});
+
+
+
+
 
 //导出路由器
 module.exports=router;

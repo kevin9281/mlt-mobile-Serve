@@ -185,7 +185,42 @@ INSERT INTO home VALUES(null,'园田海未OP装良笑社粘土人510-《Love Liv
 (null,'双叶杏景品-《偶像大师》眼镜厂 SQ系列 景品手办','http://127.0.0.1:3000/product/home4.jpg',75,90,'眼镜厂 SQ景品 Candy Island'),
 (null,'定春长款钱包-《银魂》 万事屋吉祥物 正版拉链钱包 现货','http://127.0.0.1:3000/product/home5.jpg',22,26.4,'漫能 万事屋吉祥物');
 
+CREATE TABLE login(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  uname VARCHAR(25),
+  upwd VARCHAR(32),
+  email VARCHAR(50) check (email like '%@%')
+);
+INSERT INTO login VALUES(null,'dingding',md5('123456'),'121282320@qq.com'),
+(null,'dangdang',md5('654321'),'121282321@qq.com');
+#md5密码加密 理解:用户输入123对 用户密码的内容加密
 
 
+CREATE TABLE Category_product(
+  pid INT PRIMARY KEY AUTO_INCREMENT,
+  family_id INT(11) DEFAULT NULL,
+  title VARCHAR(128) DEFAULT NULL,
+  price DECIMAL(10,2) DEFAULT NULL,
+  oldprice DECIMAL(10,2) DEFAULT NULL,
+  brand VARCHAR(64) DEFAULT NULL,
+  stock VARCHAR(32) DEFAULT NULL,
+  categoryPic VARCHAR(256) DEFAULT NULL,
+  goodsPic VARCHAR(256) DEFAULT NULL
+);
 
-
+INSERT INTO Category_product VALUES
+(null,1,'苏九儿手办-《妖怪名单》特典版 Myethos 正版',570,0,'myethos','暂时缺货','http://127.0.0.1:3000/scr/1.jpg','http://127.0.0.1:3000/scr/111.jpg http://127.0.0.1:3000/scr/112.jpg'),
+(null,2,'myethos 希尔手办-《崩坏学园2》 1/8 普通版 正版 预售',648,0,'myethos','暂时缺货','http://127.0.0.1:3000/scr/2.jpg','http://127.0.0.1:3000/scr/211.jpg http://127.0.0.1:3000/scr/212.jpg'),
+(null,3,'漫骆驼官方出品 少司命手办-《秦时明月》十周年纪念版手办 myethos 正版',624,628,'myethos','暂时缺货','http://127.0.0.1:3000/scr/3.jpg','http://127.0.0.1:3000/scr/311.jpg http://127.0.0.1:3000/scr/312.jpg'),
+(null,4,'【特价】雪之下雪乃 和服 Ver-《我的青春恋爱物语果然有问题。》雪之下雪乃 和服 Ver代理版 预售',832,0,'<<我的青春恋爱物语果然有问题.>>','暂时缺货','http://127.0.0.1:3000/scr/4.jpg','http://127.0.0.1:3000/scr/411.jpg http://127.0.0.1:3000/scr/412.jpg'),
+(null,5,'【特价】figma 敌法师(带封内特典)-《DOTA2》figma 敌法师(带封内特典)代理版 预售',461,0,'DOTA2','暂时缺货','http://127.0.0.1:3000/scr/5.jpg','http://127.0.0.1:3000/scr/511.jpg http://127.0.0.1:3000/scr/512.jpg'),
+(null,6,'【特价】粘土人 米拉娜(带封内特典)-《DOTA2》粘土人 米拉娜(带封内特典)代理版 预售',283,0,'DOTA2','暂时缺货','http://127.0.0.1:3000/scr/6.jpg','http://127.0.0.1:3000/scr/611.jpg http://127.0.0.1:3000/scr/612.jpg'),
+(null,7,'【特价】粘土人 龙骑士(带封内特典)-《DOTA2》粘土人 龙骑士代理版 预售',283,0,'DOTA2','暂时缺货','http://127.0.0.1:3000/scr/7.jpg','http://127.0.0.1:3000/scr/711.jpg http://127.0.0.1:3000/scr/712.jpg'),
+(null,8,'【特价】粘土人 战栗的龙卷-《一拳超人》粘土人 战栗的龙卷 代理版 预售',309,0,'一拳超人','暂时缺货','http://127.0.0.1:3000/scr/8.jpg','http://127.0.0.1:3000/scr/811.jpg http://127.0.0.1:3000/scr/812.jpg'),
+(null,9,'【特价】粘土人 Archer Super Movable Edition(再販)预售',243,0,'Fate stay night','暂时缺货','http://127.0.0.1:3000/scr/9.jpg','http://127.0.0.1:3000/scr/911.jpg http://127.0.0.1:3000/scr/912.jpg'),
+(null,10,'TAKARA TOMY MP33 火地狱-《变形金刚》 消防车 大师级 3C 正版模型 代理版 预售','待定',0,'变形金刚','暂时缺货','http://127.0.0.1:3000/scr/10.jpg','http://127.0.0.1:3000/scr/1111.jpg http://127.0.0.1:3000/scr/1112.jpg'),
+(null,11,'联盟款T恤-《魔兽世界》 2016夏季新款男装 全款预售 6月初发货 正版T恤 预售',129,129,'魔兽世界','暂时缺货','http://127.0.0.1:3000/scr/11.jpg','http://127.0.0.1:3000/scr/11.jpg http://127.0.0.1:3000/scr/1222.jpg'),
+(null,12,'部落款T恤-《魔兽世界》 2016夏季新款男装 全款预售 6月初发货 正版T恤 预售',129,129,'魔兽世界','暂时缺货','http://127.0.0.1:3000/scr/12.jpg','http://127.0.0.1:3000/scr/12.jpg http://127.0.0.1:3000/scr/1322.jpg'),
+(null,13,'万代 宇智波鼬 人偶-《火影忍者》魂限定 SHF 疾风传 佐助VS鼬 正版人偶',419,419,'火隐忍者','暂时缺货','http://127.0.0.1:3000/scr/13.jpg','http://127.0.0.1:3000/scr/13.jpg http://127.0.0.1:3000/scr/13.jpg'),
+(null,14,'TAKARA TOMY IDW LG_31 巨无霸福特-《变形金刚》 泰坦级 正版模型 日版 预售','待定',0,'变形金刚','暂时缺货','http://127.0.0.1:3000/scr/14.jpg','http://127.0.0.1:3000/scr/14.jpg http://127.0.0.1:3000/scr/14.jpg'),
+(null,15,'Alter 绀菊 手办-《胧村正》 妖刀传 正版手办 再版 现货',758,710,'胧村正','暂时缺货','http://127.0.0.1:3000/scr/15.jpg','http://127.0.0.1:3000/scr/15.jpg http://127.0.0.1:3000/scr/15.jpg')
