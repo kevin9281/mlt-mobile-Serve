@@ -33,17 +33,21 @@ router.get("/imageList",(req,res)=>{
 // 测试接口:http://127.0.0.1:3000/product/imageList
 });
 
-//Category 页面商品
+//Category 页面商品 分页 查询
 router.get('/categoryPro',(req,res)=>{
-	var pid = req.query.pid;
-	if(!pid) { pid = 1}
-	pool.query('SELECT * FROM category_product LIMIT 0,10',[pid],(err,result)=>{
+	var obj = req.query;
+	var pno = obj.pno;
+	var pageSize = obj.pageSize;
+	if (!pno ) { pno = 1}
+	if (!pageSize ) { pageSize = 1}
+	var sql =' SELECT * FROM Category_product LIMIT ?,?';
+	var offset = ( pno-1 ) * pageSize;
+	var ps = parseInt ( pageSize );
+	pool.query (sql,[offset,ps],(err,result)=>{
 		if(err) throw err;
-		if(result.length > 0 ) {
-			res.send({ code:1,data:result })
-		}
+		res.send ({ code:1,data:result });
 	})
-//测试接口:http://127.0.0.1:3000/product/categoryPro?pid=1
+//测试接口:http://127.0.0.1:3000/product/categoryPro?pno=1&pageSize=10
 });
 
 
