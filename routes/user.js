@@ -8,6 +8,7 @@ var router=express.Router();
 //往路由器中添加路由
 //one:logining start
 //http://127.0.0.1:3000/user/login?uname=dingding&upwd=123456
+//1:参数 2:sql 3:json
 router.get('/login',(req,res)=>{
 	var uname = req.query.uname, 
 			upwd = req.query.upwd;
@@ -18,6 +19,7 @@ pool.query(sql,[uname,upwd],(err,result)=>{
 	if(result.length == 0) {
 		res.send({code:-1,msg:"用户名或者密码错误"});
 	}else{
+		//将用户数据保存在session中
 		var id = result[0].id;
 		req.session.uid = id;
 		// console.log(req.session.uid);
@@ -53,7 +55,21 @@ pool.query(sql,[$uname,$upwd,$uemail],(err,result)=>{
 });
 //reg end
 
-
+//检测用户名是否被注册
+//result 返回的数组 如果数组长度大于0就证明已经注册过了
+//json
+router.post("/checkUname",(req,res)=>{
+	var $uname = req.body.uname;    //获取uname
+	var sql="SELECT * FROM login WHERE uname =?";
+	pool.query(sql,[$uname],(err,result)=>{
+			if(err) throw err;
+			if(result.length > 0){
+					res.send({ok:0,msg:"该用户名已被注册"})
+			}else{
+					res.send({ok:1,msg:"恭喜该用户名可以使用"})
+		}
+	})
+}); 
 
 
 //导出路由器
