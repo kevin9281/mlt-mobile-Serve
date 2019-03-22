@@ -189,10 +189,13 @@ CREATE TABLE login(
   id INT PRIMARY KEY AUTO_INCREMENT,
   uname VARCHAR(25),
   upwd VARCHAR(32),
-  email VARCHAR(50) check (email like '%@%')
+  email VARCHAR(50) check (email like '%@%'),
+  level VARCHAR(32) DEFAULT NULL,
+  integral VARCHAR(32) DEFAULT NULL
 );
-INSERT INTO login VALUES(null,'dingding',md5('123456'),'121282320@qq.com'),
-(null,'dangdang',md5('654321'),'121282321@qq.com');
+INSERT INTO login VALUES
+(null,'dingding',md5('123456'),'121282320@qq.com','注册用户','30'),
+(null,'dangdang',md5('654321'),'121282321@qq.com','金卡用户','9999');
 #md5密码加密 理解:用户输入123对 用户密码的内容加密
 
 
@@ -224,3 +227,32 @@ INSERT INTO Category_product VALUES
 (null,13,'万代 宇智波鼬 人偶-《火影忍者》魂限定 SHF 疾风传 佐助VS鼬 正版人偶',419,419,'火隐忍者','暂时缺货','http://127.0.0.1:3000/scr/13.jpg','http://127.0.0.1:3000/scr/13.jpg http://127.0.0.1:3000/scr/13.jpg'),
 (null,14,'TAKARA TOMY IDW LG_31 巨无霸福特-《变形金刚》 泰坦级 正版模型 日版 预售','待定',0,'变形金刚','暂时缺货','http://127.0.0.1:3000/scr/14.jpg','http://127.0.0.1:3000/scr/14.jpg http://127.0.0.1:3000/scr/14.jpg'),
 (null,15,'Alter 绀菊 手办-《胧村正》 妖刀传 正版手办 再版 现货',758,710,'胧村正','暂时缺货','http://127.0.0.1:3000/scr/15.jpg','http://127.0.0.1:3000/scr/15.jpg http://127.0.0.1:3000/scr/15.jpg')
+
+CREATE TABLE Catproduct(
+  pid INT PRIMARY KEY AUTO_INCREMENT,
+  family_id INT(11) DEFAULT NULL,
+  title VARCHAR(128) DEFAULT NULL,
+  price DECIMAL(10,2) DEFAULT NULL,
+  oldprice DECIMAL(10,2) DEFAULT NULL,
+  brand VARCHAR(64) DEFAULT NULL,
+  stock VARCHAR(32) DEFAULT NULL,
+  categoryPic VARCHAR(256) DEFAULT NULL,
+  goodsPic VARCHAR(256) DEFAULT NULL
+);
+
+INSERT INTO Catproduct VALUES
+(null,1,'园田海未OP装良笑社粘土人510-《Love Live》良笑社 No.510 Q版粘土人',175,210,'Love Live','暂时缺货','http://127.0.0.1:3000/xq/1.jpg http://127.0.0.1:3000/xq/12.jpg http://127.0.0.1:3000/xq/13.jpg','http://127.0.0.1:3000/xq/14.jpg http://127.0.0.1:3000/xq/15.jpg http://127.0.0.1:3000/xq/16.jpg http://127.0.0.1:3000/xq/19.jpg'),
+(null,2,'站立版Saber新娘版SEGA景品-《Fate Extra CCC》 SEGA 景品手办',95,0,'Fate stay night','暂时缺货','http://127.0.0.1:3000/xq/2.jpg http://127.0.0.1:3000/xq/21.jpg http://127.0.0.1:3000/xq/21.jpg','http://127.0.0.1:3000/xq/22.jpg http://127.0.0.1:3000/xq/23.jpg http://127.0.0.1:3000/xq/24.jpg http://127.0.0.1:3000/xq/30.jpg'),
+(null,3,'皮卡丘眼镜厂挂件-《口袋妖怪》眼镜厂 毛绒钥匙挂件特价（随机发货）',11,13.2,'口袋妖怪','暂时缺货','http://127.0.0.1:3000/xq/pkq.jpg http://127.0.0.1:3000/xq/pkq.jpg http://127.0.0.1:3000/xq/pkq.jpg','http://127.0.0.1:3000/xq/pkqxq1.jpg http://127.0.0.1:3000/xq/pkqxq2.jpg http://127.0.0.1:3000/xq/pkqxq3.jpg http://127.0.0.1:3000/xq/pkqxq4.jpg'),
+(null,4,'双叶杏景品-《偶像大师》眼镜厂 SQ系列 景品手办',75,90,'偶像大师','暂时缺货','http://127.0.0.1:3000/xq/3.jpg http://127.0.0.1:3000/xq/3.jpg http://127.0.0.1:3000/xq/3.jpg','http://127.0.0.1:3000/xq/6.jpg http://127.0.0.1:3000/xq/61.jpg http://127.0.0.1:3000/xq/62.jpg http://127.0.0.1:3000/xq/63.jpg' ),
+(null,5,'定春长款钱包-《银魂》 万事屋吉祥物 正版拉链钱包 现货',22,26.4,'银魂','暂时缺货','http://127.0.0.1:3000/xq/4.jpg http://127.0.0.1:3000/xq/4.jpg http://127.0.0.1:3000/xq/4.jpg','http://127.0.0.1:3000/xq/9.jpg http://127.0.0.1:3000/xq/91.jpg http://127.0.0.1:3000/xq/92.jpg http://127.0.0.1:3000/xq/93.jpg')
+
+CREATE TABLE mlt_cart(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  count INT,
+  price DECIMAL(10,2),
+  pid INT,
+  uid INT
+);
+INSERT INTO mlt_cart VALUES
+()
