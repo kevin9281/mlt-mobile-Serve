@@ -18,11 +18,11 @@ pool.query(sql,[uname,upwd],(err,result)=>{
 	if(err) throw err;
 	if(result.length == 0) {
 		res.send({code:-1,msg:"用户名或者密码错误"});
-	}else{
+	}else{//如果登录成功将用户id 保存到session中
 		//将用户数据保存在session中
-		var id = result[0].id;
-		req.session.uid = id;
-		// console.log(req.session.uid);
+		var id = result[0].id;  //保存当前用户id
+		req.session.uid = id;   //当前id保存到session中 然后一直保存在服务器
+		//console.log(req.session.uid);
 		res.send({code:1,msg:"登录成功!"});
 		}
 	});
@@ -71,6 +71,32 @@ router.post("/checkUname",(req,res)=>{
 	})
 }); 
 
+//验证是否登录
+//http://127.0.0.1:3000/user/islogin?id=1
+router.get("/islogin",(req,res)=>{
+	console.log(req.session.uid);
+	if(req.session.uid === undefined){
+		res.send({ok:0,uid:toString(req.session.uid)})
+	} else {
+		var uid = req.session.uid;
+		var sql ="SELECT uname FROM login WHERE id = ?";
+		pool.query(sql,[uid],(err,result)=>{
+			if(err) throw err;
+			if(result.length > 0 ) {
+				res.send({ok:1,uname:result[0].uname,uid:uid})
+			} else {
+				res.send({ok:0})
+			}
+		})
+	}
+})
+
+
+//退出登录 注销
+router.get("/signout",(req,res)=>{
+	req.session.uid = undefined;
+	res.send({code:1});
+})
 
 //导出路由器
 module.exports=router;

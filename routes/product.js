@@ -89,7 +89,7 @@ router.get("/findProduct",(req,res)=>{
 router.get("/addcart",(req,res)=>{
 	var pid = parseInt(req.query.pid);
 	var count = 1;
-	var uid = parseInt(req.query.uid);
+	var uid = req.session.uid; //直接从服务器获取uid
 	var price = parseInt(req.query.price);
 	var sql = "SELECT id FROM mlt_cart";
 			sql+=" WHERE uid = ? AND pid = ?";
@@ -119,10 +119,10 @@ router.get("/addcart",(req,res)=>{
 //功能 购物车列表
 //http://127.0.0.1:3000/product/cartlist?uid=1
 router.get("/cartlist",(req,res)=>{
-	var uid = req.query.uid;
+	var uid = req.session.uid;
 //多表查询 sql
 	var sql = " SELECT m.id,m.count,m.price,";
-			sql+=" m.uid,m.pid,c.title";
+			sql+=" m.uid,m.pid,c.title,c.cartPic";
 			sql+=" FROM mlt_cart m,catproduct c";
 			sql+=" WHERE c.pid = m.pid";
 			sql+=" AND m.uid = ?";
@@ -131,5 +131,71 @@ router.get("/cartlist",(req,res)=>{
 		res.send({code:1,data:result})
 	})
 });
+
+
+//功能 删除购物车中一件商品
+//http://127.0.0.1:3000/product/delCartItem?id=5
+router.get("/delCartItem",(req,res)=>{
+	// 1:参数 id
+	var id = req.query.id;
+	// 2:sql DELETE
+	var sql = "DELETE FROM mlt_cart WHERE id = ?";
+	pool.query(sql,[id],(err,result)=>{
+		if(err)throw err;
+		if(result.affectedRows > 0) {     //如果返回数组影响的长度大于0 就是操作过了
+			res.send({code:1,msg:"删除成功!"});
+		} else {
+			res.send({code:-1,msg:"删除失败!"});
+		}
+	})
+	// 3:json msg
+})
+
+
+//功能 删除购物车中多个指定商品 
+//http://127.0.0.1:3000/product/removeMItem?ids=7,8
+router.get("/removeMItem",(req,res)=>{
+	// 1:参数 ids
+	var ids = req.query.ids;
+	// 2:sql
+	var sql =" DELETE FROM mlt_cart";
+			sql +=" WHERE id IN ("+ids+")";
+	// 3:json
+	pool.query(sql,(err,result)=>{
+		if(err) throw err;
+		if(result.affectedRows > 0 ) {
+			res.send({code:1,msg:"删除成功!"})
+		} else {
+			res.send({code:-1,msg:"删除失败!"})
+		}
+	})
+	// 4:请求地址格式
+});
+
+//购物车数量修改
+router.get('/updatecart',(req,res)=>{
+	var uid = req.query.uid;
+	var pid = req.query.pid;
+	var count = req.query.count;
+	var sql ='UPDATE mlt_cart SET count=? WHERE uid=? AND pid=?';
+pool.query(sql,[count,uid,pid],(err,result)=>{
+		if(err) throw err;
+		if(result.affectedRows > 0 ){
+			res.send({code:1})
+		} else {
+			res.send({code:0})
+		}
+	})
+})
+
+//购物车清空
+router.get('/clearcart',(req,res)=>{
+	var uid=req.query.uid;
+	pool.query('DELETE FROM mlt_cart  WHERE uid=?',[uid],(err,result)=>{
+			if(err)throw err;
+			if(result.affectedRows>0){res.send({code:1})}else{res.send({code:0})}
+	})
+})
+
 //导出路由器
 module.exports=router;

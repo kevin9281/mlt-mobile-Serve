@@ -25,7 +25,7 @@ app.use(cors({
 }));
 //配置express-session
 app.use(session({
-  secret:"128位随机字符",  //安全字符串
+  secret:"128位随机字符",  //自定义安全字符串
   resave:false, //每次请求是否都需要刷新更新数据
   saveUninitialized:true, //初始化时是否保存数据
   cookie:{
