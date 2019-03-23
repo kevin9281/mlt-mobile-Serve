@@ -42,7 +42,7 @@ router.post('/Registered',(req,res)=>{
 	if (!$uemail ) { res.send({ code:401,msg:"email required"}); return};
 //把用户信息插入数据库
 	var sql ='INSERT INTO login VALUES'
-			sql+='(NULL,?,md5(?),?)';
+			sql+='(NULL,?,md5(?),?,NULL,NULL)';
 pool.query(sql,[$uname,$upwd,$uemail],(err,result)=>{
 	if (err) throw err;
 //判断affectedRows是否大于0(是否插入成功)
