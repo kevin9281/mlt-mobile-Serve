@@ -22,8 +22,8 @@ pool.query(sql,[uname,upwd],(err,result)=>{
 		//将用户数据保存在session中
 		var id = result[0].id;  //保存当前用户id
 		req.session.uid = id;   //当前id保存到session中 然后一直保存在服务器
-		//console.log(req.session.uid);
-		res.send({code:1,msg:"登录成功!"});
+		//console.log(uid);
+		res.send({code:1,msg:"登录成功!",id:id});
 		}
 	});
 })

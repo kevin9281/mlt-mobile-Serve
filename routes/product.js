@@ -35,35 +35,41 @@ router.get("/imageList",(req,res)=>{
 
 //Category 页面商品 分页 查询
 router.get('/categoryPro',(req,res)=>{
+	//浏览器请求的为数组格式，里面的属性值为字符串，需要转为数字格式
 	var obj = req.query;
 	var pno = obj.pno;
 	var pageSize = obj.pageSize;
+	//当不输入数据是，默认页码为1，数量为10
 	if (!pno ) { pno = 1}
-	if (!pageSize ) { pageSize = 1}
+	if (!pageSize ) { pageSize = 10}
 	var sql =' SELECT * FROM Category_product LIMIT ?,?';
 	var offset = ( pno-1 ) * pageSize;
 	var ps = parseInt ( pageSize );
 	pool.query (sql,[offset,ps],(err,result)=>{
 		if(err) throw err;
-		res.send ({ code:1,data:result });
+		if(result.length > 0) {
+			res.send ({ code:1,data:result });
+		} else {
+			res.send ({ code:0,msg:'no result'});
+		}
 	})
 //测试接口:http://127.0.0.1:3000/product/categoryPro?pno=1&pageSize=10
 });
 
-//获取商品详细信息
+//获取商品详细信息 查表 catproduct
 //测试接口:http://127.0.0.1:3000/product/productDetails?pid=1
 router.get("/productDetails",(req,res)=>{
 	// 1:获取参数
 	var pid = req.query.pid;
 	// 2:创建正则 最少1个字 多了不限
 	var reg = /^\d{1,}$/;
-	// 3:如严重失败 输出错误
+	// 3:如验证失败 输出错误
 	if(!reg.test(pid)){
 		res.send({code:-1,msg:"商品的编号格式有误!"});
 		return; //函数停止运行
 	}
 	// 4:创建sql
-	var sql = 'SELECT * FROM catproduct WHERE pid =?'
+	var sql = 'SELECT * FROM category_product WHERE pid =?'
 	// 5:发送sql
 	pool.query(sql,[pid],(err,result)=>{
 		if(err) throw err;
